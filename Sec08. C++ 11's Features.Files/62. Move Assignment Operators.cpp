@@ -29,10 +29,10 @@ public:
         _pBuffer = new int[SIZE]{};
         
         memcpy(_pBuffer, obj._pBuffer, SIZE*sizeof(int));
-        
     }
     Test(Test &&other){
         cout << "Move constructor" << endl;
+        delete [] _pBuffer;
         _pBuffer = other._pBuffer;
         other._pBuffer = nullptr;
     }

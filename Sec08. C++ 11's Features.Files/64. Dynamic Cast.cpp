@@ -4,36 +4,38 @@
 using namespace std;
 
 class Parent {
-public:
-  virtual void speak(){
-    cout << "parent" << endl;
-  }
+    virtual void speak() {      // if there's not virtual, get the error like "Parent" is not polymorphic
+        cout << "parent" << endl;
+    }
 };
-class Brother : public Parent{
-
+class Brother : public Parent {
+    
 };
 class Sister : public Parent {
-
+    
 };
 
-int main(){
-  Parent parent;
-  Brother brother;
-
-  // unsafe to do -- compile time, not runtime error
-  // dynamic cast detect runtime error if it doesn't make sense
-  Parent* ppb = &brother;
-  Brother* pbb = dynamic_cast<Brother*>(ppb);
-
-  if(pbb == nullptr){
-    cout << "Invalid cast" << endl;
-  } else {
-    cout << pbb << endl;
-  }
-
-  return 0;
+int main () {
+    
+    Parent parent;
+    Brother brother;
+    
+    Parent* ppb = &parent; // if use &brother, it has not nullptr.
+    Brother* pbb = dynamic_cast<Brother*>(ppb);
+    
+    if(pbb == nullptr){
+        cout << "invalie cast" << endl;
+    } else {
+        cout << pbb << endl;
+    }
+    
+    // static_cast still allow us to point to superclass
+    // superclass might lack methods that the subclass has,
+    // and you might try to call using this pointer, it will crash
+    // run time can detect if it makes sense
+    
+    return 0;
 }
-
 
 /*
  EXERCISE - 63

@@ -1,4 +1,3 @@
-
 //  57. Constructors and Memory
 #include <iostream>
 #include <vector>

@@ -67,6 +67,7 @@ int main(){
     
 //    Test& rtest2 = getTest();
     const Test& rtest2 = getTest();
+//    the life of rvalue gets extended as long as lvalue exists
     
     Test test2(Test(1));
 

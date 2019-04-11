@@ -2,35 +2,35 @@
 //65. Reinterpret Cast
 #include <iostream>
 using namespace std;
+
 class Parent {
-public:
-    virtual void speak(){
+    virtual void speak() {      // if there's not virtual, get the error like "Parent" is not polymorphic
         cout << "parent" << endl;
     }
 };
-class Brother : public Parent{
+class Brother : public Parent {
     
 };
 class Sister : public Parent {
     
 };
 
-int main(){
+int main () {
     Parent parent;
     Brother brother;
     Sister sister;
     
-    // unsafe to do -- compile time, not runtime error
-    // dynamic cast detect runtime error if it doesn't make sense
     Parent* ppb = &brother;
-    Sister* pbb = reinterpret_cast<Sister*>(ppb);
+    //    Sister* pps = dynamic_cast<Sister*>(ppb);     // it's null
+    //    Sister* pps = static_cast<Sister*>(ppb);      // 0x7ffeefbff4b8
+    Sister* pps = reinterpret_cast<Sister*>(ppb);   // 0x7ffeefbff4b8
     
-    if(pbb == nullptr){
-        cout << "Invalid cast" << endl;
+    
+    if(pps == nullptr){
+        cout << "it's null" << endl;
     } else {
-        cout << pbb << endl;
+        cout << pps << endl;
     }
-    
     return 0;
 }
 

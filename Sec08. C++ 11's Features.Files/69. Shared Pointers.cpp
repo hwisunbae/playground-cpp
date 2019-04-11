@@ -20,16 +20,14 @@ public:
 };
 
 int main() {
-//    shared_ptr<Test> pTest1(new Test());
-    
     shared_ptr<Test> pTest2(nullptr);
     
     {
-        shared_ptr<Test> pTest1 = make_shared<Test>();
-        pTest2 = pTest1;
-        // without upper line, destyored comes frist before finished
+        shared_ptr<Test> pTest1(new Test()); // finishd -> destroyed
+        // <=> shared_ptr<Test> pTest2 = make_shared<Test>();
         
-        auto pTest3 = pTest1;
+        pTest2 = pTest1;
+        // without this, dstroyed -> finsihed
     }
     cout << "finished" << endl;
     return 0;

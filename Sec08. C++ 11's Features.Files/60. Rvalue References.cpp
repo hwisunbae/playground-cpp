@@ -70,9 +70,12 @@ int main(){
     vec.push_back(Test());
     
     Test& ltest1 = test1;
+    
     // && can only bind to lvalue
+    // so Test&& rtest1 = test1; won't work
+    
     Test&& rtest1 = Test();
-    rtest1 = getTest();
+    Test&& rtest1 = getTest();
     
     check(test1);
     check(getTest());

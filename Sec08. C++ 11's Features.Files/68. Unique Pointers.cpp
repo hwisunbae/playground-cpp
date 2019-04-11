@@ -21,29 +21,33 @@ public:
 
 class Temp {
     unique_ptr<Test[]> pTest;
-    
+    // no longer need to have destructor
 public:
-    Temp() : pTest(new Test[2]){
-        
-    }
+    Temp() : pTest(new Test[2]){ }
 };
 
 int main () {
     
+    
+    unique_ptr<int> pTest(new int);     //handle dellocation for you
+    *pTest = 7;
+    cout << *pTest << endl;
+    
+    unique_ptr<Test> pTest3(new Test);
+    pTest3->greet();     // finished -> destroyed
+    // unique or smart pointer cleans up the memory when going out ot scope
+    
     {
-        Temp temp;
-        //    unique_ptr<Test[]> pTest(new Test[2]);
-        //
-        //    pTest[0].greet();
-        
-        //    unique_ptr<Test> pTest(new Test);
-        //
-        //    pTest->greet();
-        // unique or smart pointer cleans up the memory when going out ot scope
+        unique_ptr<Test> pTest(new Test);
+        pTest->greet(); // destroyed -> finished
     }
     
+    unique_ptr<Test[]> pTest2(new Test[2]);
+    pTest2[0].greet();
     
-    cout << "finished" << endl;
+    Temp temp;
+    
+    cout << "finished " << endl;
     return 0;
 }
 
